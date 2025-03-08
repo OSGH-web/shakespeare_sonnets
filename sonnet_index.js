@@ -16,6 +16,8 @@ let state = {
   blogView: false,
   darkMode: false,
   controlsHidden: false,
+
+  scrolled: false,
 };
 
 function initialize() {
@@ -79,8 +81,15 @@ function initialize() {
   });
 
   window.addEventListener("scroll", () => {
-    updateIndex(getTopHeader());
+    state.scrolled = true;
   });
+
+  setInterval(() => {
+    if (state.scrolled) {
+      state.scrolled = false;
+      updateIndex(getTopHeader());
+    }
+  }, 50);
 
   static.elements.toggleViewButton.addEventListener("click", toggleBlogView);
   static.elements.toggleDarkModeButton.addEventListener(
