@@ -1,0 +1,120 @@
+@font-face {
+    font-family: "HelveticaWorld-Bold";
+    src:
+        local("HelveticaWorld Bold"),
+        url("./assets/fonts/HelveticaWorld-Bold.ttf") format("truetype")
+}
+
+@font-face {
+    font-family: "Helvetica";
+    src:
+        local("Helvetica"),
+        url("./assets/fonts/HelveticaWorld-Regular.ttf") format("truetype")
+}
+
+:root {
+    --font-size: 100px;
+    --line-height-ratio: .78;
+    --line-height-px: calc(var(--line-height-ratio) * var(--font-size));
+
+    --small-font-size-ratio: calc(1/4);
+    --small-font-size: calc(var(--font-size) * var(--small-font-size-ratio));
+    --small-font-height-px: calc(var(--line-height-ratio) * var(--small-font-size));
+    --small-vertical-margin: calc(1/2 * var(--small-font-height-px));
+
+    --vertical-margin: calc(var(--small-font-height-px) + var(--small-vertical-margin));
+}
+
+body {
+    background-color: black;
+    color: white;
+
+    font-family: "Helvetica";
+    font-size: var(--font-size);
+    font-weight: 300;
+    line-height: var(--line-height-ratio);
+    margin: 0;
+
+    margin-left: calc(2 * var(--vertical-margin));
+    padding-top: var(--small-vertical-margin);
+}
+
+.header {
+    font-size: var(--font-size);
+
+    height: var(--line-height-px);
+    margin-bottom: 0;
+    margin-top: var(--vertical-margin);
+
+    font-weight: auto;
+
+    width: calc(2 * var(--line-height-px));
+}
+
+.quatrain, .couplet {
+    margin-bottom: var(--vertical-margin);
+    margin-top: var(--vertical-margin);
+}
+
+.line {
+    font-size: var(--small-font-size);
+
+    height: var(--small-font-height-px);
+
+    margin: 0;
+    padding-top: var(--small-vertical-margin);
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+@media only screen and (max-width: 940px) {
+    :root {
+        --small-font-size-ratio: calc(1/4);
+    }
+}
+
+@media only screen and (max-width: 705px) {
+    :root {
+        --font-size: 75px;
+    }
+}
+
+
+@media screen and (max-width: 530px) {
+    :root {
+        --font-size: 65px;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    :root {
+        --font-size: 60px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    :root {
+        --font-size: 55px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    :root {
+        --font-size: 50px;
+    }
+}
+
+@media screen and (max-width: 355px) {
+    :root {
+        --font-size: 45px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    :root {
+        --font-size: 40px;
+    }
+}
