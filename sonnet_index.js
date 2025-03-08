@@ -80,17 +80,6 @@ function initialize() {
     }
   });
 
-  window.addEventListener("scroll", () => {
-    state.scrolled = true;
-  });
-
-  setInterval(() => {
-    if (state.scrolled) {
-      state.scrolled = false;
-      updateIndex(getTopHeader());
-    }
-  }, 50);
-
   static.elements.toggleViewButton.addEventListener("click", toggleBlogView);
   static.elements.toggleDarkModeButton.addEventListener(
     "click",
@@ -133,25 +122,6 @@ function toggleDarkMode() {
 function toggleControlsHidden() {
   state.controlsHidden = !state.controlsHidden;
   render();
-}
-
-function getTopHeader() {
-  const headers = document.querySelectorAll("[data-role=sonnet-number-header]");
-  let topElement = null;
-  let minDistance = Infinity;
-
-  headers.forEach((header) => {
-    const rect = header.getBoundingClientRect();
-    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-      const distance = Math.abs(rect.top);
-      if (distance < minDistance) {
-        minDistance = distance;
-        topElement = header;
-      }
-    }
-  });
-
-  return parseInt(topElement.innerText) - 1;
 }
 
 function renderBlogView() {
