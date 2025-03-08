@@ -1,69 +1,84 @@
 <html>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <body>
-        <div class="flex-row">
-            <h1 id="sonnet-number-header" class="header"></h1>
-            <h1 class="header"></h1>
+        <div id="poem-body"></div>
+
+        <div class="flex-row controls">
+            <h1 class="header">
+                <a id="dark-mode-toggle">☽</a>
+            </h1>
             <h1 class="header">
                 <a id="decrement-control">←</a>
             </h1>
             <h1 class="header">
                 <a id="increment-control">→</a>
             </h1>
-        </div>
-
-        <div id="poem-body">
+            <h1 class="header">
+                <a id="toggle-view">BV</a>
+            </h1>
         </div>
     </body>
 
     <template id="poem-body-template">
-        <div class="quatrain">
-            <p data-role="row-0" class="line"></p>
-            <p data-role="row-1" class="line"></p>
-            <p data-role="row-2" class="line"></p>
-            <p data-role="row-3" class="line"></p>
-        </div>
-        <div class="quatrain">
-            <p data-role="row-4" class="line"></p>
-            <p data-role="row-5" class="line"></p>
-            <p data-role="row-6" class="line"></p>
-            <p data-role="row-7" class="line"></p>
-        </div>
-        <div class="quatrain">
-            <p data-role="row-8" class="line"></p>
-            <p data-role="row-9" class="line"></p>
-            <p data-role="row-10" class="line"></p>
-            <p data-role="row-11" class="line"></p>
-        </div>
-        <div class="couplet">
-            <p data-role="row-12" class="line"></p>
-            <p data-role="row-13" class="line"></p>
+        <div class="sonnet">
+            <div class="flex-row">
+                <h1 data-role="sonnet-number-header" class="header"></h1>
+            </div>
+
+            <div class="quatrain">
+                <p data-role="row-0" class="line"></p>
+                <p data-role="row-1" class="line"></p>
+                <p data-role="row-2" class="line"></p>
+                <p data-role="row-3" class="line"></p>
+            </div>
+            <div class="quatrain">
+                <p data-role="row-4" class="line"></p>
+                <p data-role="row-5" class="line"></p>
+                <p data-role="row-6" class="line"></p>
+                <p data-role="row-7" class="line"></p>
+            </div>
+            <div class="quatrain">
+                <p data-role="row-8" class="line"></p>
+                <p data-role="row-9" class="line"></p>
+                <p data-role="row-10" class="line"></p>
+                <p data-role="row-11" class="line"></p>
+            </div>
+            <div class="couplet">
+                <p data-role="row-12" class="line"></p>
+                <p data-role="row-13" class="line"></p>
+            </div>
         </div>
     </template>
 
     <template id="poem-body-template-99">
-        <div class="quatrain">
-            <p data-role="row-0" class="line"></p>
-            <p data-role="row-1" class="line"></p>
-            <p data-role="row-2" class="line"></p>
-            <p data-role="row-3" class="line"></p>
-            <p data-role="row-4" class="line"></p>
-        </div>
-        <div class="quatrain">
-            <p data-role="row-5" class="line"></p>
-            <p data-role="row-6" class="line"></p>
-            <p data-role="row-7" class="line"></p>
-            <p data-role="row-8" class="line"></p>
-        </div>
-        <div class="quatrain">
-            <p data-role="row-9" class="line"></p>
-            <p data-role="row-10" class="line"></p>
-            <p data-role="row-11" class="line"></p>
-            <p data-role="row-12" class="line"></p>
-        </div>
-        <div class="couplet">
-            <p data-role="row-13" class="line"></p>
-            <p data-role="row-14" class="line"></p>
+        <div class="sonnet">
+            <div class="flex-row">
+                <h1 data-role="sonnet-number-header" class="header"></h1>
+            </div>
+
+            <div class="quatrain">
+                <p data-role="row-0" class="line"></p>
+                <p data-role="row-1" class="line"></p>
+                <p data-role="row-2" class="line"></p>
+                <p data-role="row-3" class="line"></p>
+                <p data-role="row-4" class="line"></p>
+            </div>
+            <div class="quatrain">
+                <p data-role="row-5" class="line"></p>
+                <p data-role="row-6" class="line"></p>
+                <p data-role="row-7" class="line"></p>
+                <p data-role="row-8" class="line"></p>
+            </div>
+            <div class="quatrain">
+                <p data-role="row-9" class="line"></p>
+                <p data-role="row-10" class="line"></p>
+                <p data-role="row-11" class="line"></p>
+                <p data-role="row-12" class="line"></p>
+            </div>
+            <div class="couplet">
+                <p data-role="row-13" class="line"></p>
+                <p data-role="row-14" class="line"></p>
+            </div>
         </div>
     </template>
 

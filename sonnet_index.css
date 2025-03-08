@@ -26,9 +26,6 @@
 }
 
 body {
-    background-color: black;
-    color: white;
-
     font-family: "Helvetica";
     font-size: var(--font-size);
     font-weight: 300;
@@ -36,19 +33,28 @@ body {
     margin: 0;
 
     margin-left: calc(2 * var(--vertical-margin));
-    padding-top: var(--small-vertical-margin);
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
 }
 
 .header {
     font-size: var(--font-size);
 
     height: var(--line-height-px);
-    margin-bottom: 0;
-    margin-top: var(--vertical-margin);
+    margin: 0;
 
     font-weight: auto;
 
     width: calc(2 * var(--line-height-px));
+
+    text-decoration: underline;
+}
+
+.header:hover {
+    color: red;
 }
 
 .quatrain, .couplet {
@@ -68,6 +74,46 @@ body {
 .flex-row {
     display: flex;
     flex-direction: row;
+}
+
+.controls {
+    position: fixed;
+    bottom: 0;
+    padding-top: calc(1 * var(--vertical-margin));
+    padding-bottom: calc(2 * var(--vertical-margin));
+
+    background-color: lightgray;
+
+    padding-left: calc(2* var(--vertical-margin));
+    margin-left: calc(-2* var(--vertical-margin));
+
+
+    padding-right: calc(2* var(--vertical-margin));
+    margin-right: calc(-2* var(--vertical-margin));
+}
+
+.dark-mode .controls {
+    background-color: #444;
+
+}
+
+.controls-hidden .controls {
+    display: none;
+}
+
+
+.hidden {
+    display: none;
+}
+
+#sonnet-number-header {
+    cursor: pointer;
+}
+
+
+.sonnet {
+    padding-top: calc(2 * var(--vertical-margin));
+    margin-bottom: calc(4 * var(--vertical-margin));
 }
 
 @media only screen and (max-width: 940px) {
