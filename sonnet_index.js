@@ -218,10 +218,10 @@ function toggleZoomedOut() {
 
   if (state.zoomedOut) {
     const root = document.documentElement;
-    root.style.setProperty("--font-base", "30px");
+    root.style.setProperty("--font-scale", "12/31");
   } else {
     const root = document.documentElement;
-    root.style.setProperty("--font-base", "100px");
+    root.style.setProperty("--font-scale", "32/31");
   }
 
   render();
