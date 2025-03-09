@@ -1,9 +1,11 @@
 const static = {
   sonnets: sonnets,
   elements: {
-    poemBodyContainerElement: document.getElementById("poem-body"),
     poemBodyTemplate: document.getElementById("poem-body-template"),
     poem99BodyTemplate: document.getElementById("poem-body-template-99"),
+    poemBodyContainerElement: document.getElementById("poem-body"),
+    poemBodyRContainerElement: document.getElementById("poem-body-r"),
+    pageTemplate: document.getElementById("page-template"),
     decrementControl: document.getElementById("decrement-control"),
     incrementControl: document.getElementById("increment-control"),
     toggleViewButton: document.getElementById("toggle-view"),
@@ -16,6 +18,7 @@ let state = {
   blogView: false,
   darkMode: false,
   controlsHidden: false,
+  secondPageHidden: false,
 
   scrolled: false,
 };
@@ -49,20 +52,36 @@ function initialize() {
 
   // add event listeners to static elements
   static.elements.decrementControl.addEventListener("click", () => {
+    // save our position if we're in blog view
+    if (state.blogView) {
+      updateIndex(getTopHeader());
+    }
     updateIndex(state.index - 1);
     scrollToCurrentSonnet();
   });
 
   static.elements.incrementControl.addEventListener("click", () => {
+    // save our position if we're in blog view
+    if (state.blogView) {
+      updateIndex(getTopHeader());
+    }
     updateIndex(state.index + 1);
     scrollToCurrentSonnet();
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft" || event.key === "h") {
+      // save our position if we're in blog view
+      if (state.blogView) {
+        updateIndex(getTopHeader());
+      }
       updateIndex(state.index - 1);
       scrollToCurrentSonnet();
     } else if (event.key === "ArrowRight" || event.key === "l") {
+      // save our position if we're in blog view
+      if (state.blogView) {
+        updateIndex(getTopHeader());
+      }
       updateIndex(state.index + 1);
       scrollToCurrentSonnet();
     }
@@ -77,6 +96,10 @@ function initialize() {
 
     if (event.key === "c") {
       toggleControlsHidden();
+    }
+
+    if (event.key === "s") {
+      toggleSecondPageHidden();
     }
   });
 
@@ -140,6 +163,12 @@ function updateIndex(idx) {
 
 function toggleBlogView() {
   state.blogView = !state.blogView;
+
+  // save our position if we're leaving blog view
+  if (!state.blogView) {
+    updateIndex(getTopHeader());
+  }
+
   render();
   scrollToCurrentSonnet();
 }
@@ -164,8 +193,15 @@ function toggleControlsHidden() {
   render();
 }
 
+function toggleSecondPageHidden() {
+  state.secondPageHidden = !state.secondPageHidden;
+  render();
+}
+
 function renderBlogView() {
   static.elements.poemBodyContainerElement.innerHTML = "";
+  // we don't render to the right side in blog view
+  static.elements.poemBodyRContainerElement.innerHTML = null;
 
   static.sonnets.forEach((sonnet, index) => {
     const isSonnet99 = index === 98 || sonnet.length === 15;
@@ -194,10 +230,19 @@ function renderBlogView() {
   });
 }
 
-function renderNormalView() {
-  const currentSonnet = sonnets[state.index];
+function renderNormalView(right) {
+  let index = state.index;
+  if (right) {
+    index += 1;
+    if (index === static.sonnets.length) {
+      static.elements.poemBodyRContainerElement.innerHTML = null;
+      return;
+    }
+  }
 
-  const isSonnet99 = state.index === 98 || currentSonnet.length === 15;
+  const currentSonnet = sonnets[index];
+
+  const isSonnet99 = index === 98 || currentSonnet.length === 15;
   const template = isSonnet99
     ? static.elements.poem99BodyTemplate
     : static.elements.poemBodyTemplate;
@@ -206,20 +251,26 @@ function renderNormalView() {
   headerElement = poemBodyElement.querySelector(
     "[data-role=sonnet-number-header]",
   );
-  headerElement.innerText = `${state.index + 1}`;
+  headerElement.innerText = `${index + 1}`;
 
-  static.elements.poemBodyContainerElement.innerHTML = null;
-  static.elements.poemBodyContainerElement.appendChild(poemBodyElement);
+  let poemBodyContainerElement = static.elements.poemBodyContainerElement;
+  if (!right) {
+    static.elements.poemBodyContainerElement.innerHTML = null;
+    static.elements.poemBodyContainerElement.appendChild(poemBodyElement);
+  } else {
+    static.elements.poemBodyRContainerElement.innerHTML = null;
+    static.elements.poemBodyRContainerElement.appendChild(poemBodyElement);
+
+    poemBodyContainerElement = static.elements.poemBodyRContainerElement;
+  }
 
   for (i = 0; i < currentSonnet.length; i++) {
     const line = currentSonnet[i];
-    const rowElement = document.querySelector(`[data-role=row-${i}]`);
+    const rowElement = poemBodyContainerElement.querySelector(
+      `[data-role=row-${i}]`,
+    );
     rowElement.innerText = line;
   }
-
-  // Update the address bar with the current sonnet number
-  const newUrl = `${window.location.pathname}?sonnet=${state.index + 1}`;
-  history.pushState({ sonnet: state.index + 1 }, "", newUrl);
 }
 
 function render() {
@@ -231,10 +282,15 @@ function render() {
 
   document.body.classList.toggle("controls-hidden", state.controlsHidden);
 
+  document.body.classList.toggle("second-page-hidden", state.secondPageHidden);
+
   if (state.blogView) {
     renderBlogView();
   } else {
     renderNormalView();
+    if (!state.secondPageHidden) {
+      renderNormalView(true);
+    }
   }
 
   // Update URL

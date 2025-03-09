@@ -1,21 +1,27 @@
 <html>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <body>
-        <p class="line title text-align-right">
-            The Sonnets of William Shakespeare
-        </p>
-        <!-- <p class="line title"></p>
-             <p class="line title"></p>
-             <p class="line title"></p> -->
-        <!-- <p class="line title">
-             The Sonnets of
-             </p>
-             <p class="line title text-align-right">
-             William Shakespeare
-             </p> -->
+        <div class="page-wrapper">
+            <div class="page">
 
-        <div id="poem-body"></div>
+                <p class="line title text-align-right">
+                    The Sonnets of William Shakespeare
+                </p>
 
+                <div id="poem-body"></div>
+
+            </div>
+
+            <div class="page page-r">
+                <p class="line title">
+                    The Sonnets of William Shakespeare
+                </p>
+                <p class="line title title-r">
+                </p>
+
+                <div id="poem-body-r"></div>
+            </div>
+        </div>
         <div class="flex-row controls">
             <h1 class="header">
                 <a id="dark-mode-toggle">☽</a>
@@ -31,6 +37,16 @@
             </h1>
         </div>
     </body>
+
+    <template id="page-template">
+        <div class="page">
+            <p class="line title text-align-right">
+                The Sonnets of William Shakespeare
+            </p>
+
+            <div id="poem-body"></div>
+        </div>
+    </template>
 
     <template id="poem-body-template">
         <div class="sonnet">
