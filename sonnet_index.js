@@ -9,6 +9,7 @@ const static = {
     decrementControl: document.getElementById("decrement-control"),
     incrementControl: document.getElementById("increment-control"),
     toggleViewButton: document.getElementById("toggle-view"),
+    toggleZoomButton: document.getElementById("toggle-zoom"),
     toggleDarkModeButton: document.getElementById("dark-mode-toggle"),
   },
 };
@@ -16,6 +17,7 @@ const static = {
 let state = {
   index: 0,
   blogView: false,
+  zoomedOut: false,
   darkMode: false,
   controlsHidden: false,
   secondPageHidden: false,
@@ -101,6 +103,10 @@ function initialize() {
     if (event.key === "s") {
       toggleSecondPageHidden();
     }
+
+    if (event.key === "z") {
+      toggleZoomedOut();
+    }
   });
 
   let previousWindowWidth = window.innerWidth;
@@ -129,6 +135,8 @@ function initialize() {
     "click",
     toggleDarkMode,
   );
+
+  static.elements.toggleZoomButton.addEventListener("click", toggleZoomedOut);
 }
 
 function getTopHeader() {
@@ -164,9 +172,11 @@ function updateIndex(idx) {
 function toggleBlogView() {
   state.blogView = !state.blogView;
 
-  // save our position if we're leaving blog view
   if (!state.blogView) {
     updateIndex(getTopHeader());
+    if (state.zoomedOut) {
+      toggleZoomedOut();
+    }
   }
 
   render();
@@ -198,6 +208,27 @@ function toggleSecondPageHidden() {
   render();
 }
 
+function toggleZoomedOut() {
+  if (!state.blogView) {
+    state.zoomedOut = false;
+    return;
+  }
+
+  state.zoomedOut = !state.zoomedOut;
+
+  if (state.zoomedOut) {
+    const root = document.documentElement;
+    root.style.setProperty("--font-base", "30px");
+  } else {
+    const root = document.documentElement;
+    root.style.setProperty("--font-base", "100px");
+  }
+
+  render();
+
+  scrollToCurrentSonnet();
+}
+
 function renderBlogView() {
   static.elements.poemBodyContainerElement.innerHTML = "";
   // we don't render to the right side in blog view
@@ -217,7 +248,9 @@ function renderBlogView() {
     headerElement.innerText = `${index + 1}`;
     headerElement.addEventListener("click", () => {
       updateIndex(index);
-      scrollToCurrentSonnet();
+      if (state.zoomedOut) {
+        toggleZoomedOut();
+      }
     });
 
     for (i = 0; i < sonnet.length; i++) {
@@ -276,6 +309,9 @@ function renderNormalView(right) {
 function render() {
   document.body.classList.toggle("blog-view", state.blogView);
   static.elements.toggleViewButton.textContent = state.blogView ? "NV" : "BV";
+  if (state.blogView) {
+    state.secondPageHidden = true;
+  }
 
   document.body.classList.toggle("dark-mode", state.darkMode);
   static.elements.toggleDarkModeButton.textContent = state.darkMode ? "☼" : "☾";
@@ -283,6 +319,8 @@ function render() {
   document.body.classList.toggle("controls-hidden", state.controlsHidden);
 
   document.body.classList.toggle("second-page-hidden", state.secondPageHidden);
+
+  document.body.classList.toggle("zoomed-out", state.zoomedOut);
 
   if (state.blogView) {
     renderBlogView();

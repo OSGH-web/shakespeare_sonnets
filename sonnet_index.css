@@ -48,6 +48,10 @@ body {
     width: var(--page-width);
 }
 
+.zoomed-out .page {
+    width: 100%
+}
+
 .page-r {
     margin-left: calc(3 * var(--vertical-margin));
 }
@@ -156,10 +160,26 @@ body {
     cursor: pointer;
 }
 
+:root .zoomed-out {
+    --font-base: 30px;
+}
+
+.zoomed-out #poem-body {
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100vh;
+
+    place-content: flex-start;
+}
+
 
 .sonnet {
     padding-top: calc(4 * var(--vertical-margin));
     margin-bottom: calc(0 * var(--vertical-margin));
+
+    margin-right: calc(2* var(--vertical-margin));
 }
 
 
