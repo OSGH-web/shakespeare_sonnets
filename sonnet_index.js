@@ -80,11 +80,51 @@ function initialize() {
     }
   });
 
+  let previousWindowWidth = window.innerWidth;
+  window.addEventListener("resize", () => {
+    const boundaryWidths = [
+      735, 685, 625, 590, 540, 510, 470, 435, 400, 365, 330,
+    ];
+    boundaryWidths.forEach((boundaryWidth) => {
+      if (
+        window.innerWidth <= boundaryWidth &&
+        previousWindowWidth > boundaryWidth
+      ) {
+        scrollToCurrentSonnet();
+      } else if (
+        window.innerWidth >= boundaryWidth &&
+        previousWindowWidth < boundaryWidth
+      ) {
+        scrollToCurrentSonnet();
+      }
+    });
+    previousWindowWidth = window.innerWidth;
+  });
+
   static.elements.toggleViewButton.addEventListener("click", toggleBlogView);
   static.elements.toggleDarkModeButton.addEventListener(
     "click",
     toggleDarkMode,
   );
+}
+
+function getTopHeader() {
+  const headers = document.querySelectorAll("[data-role=sonnet-number-header]");
+  let topElement = null;
+  let minDistance = Infinity;
+
+  headers.forEach((header) => {
+    const rect = header.getBoundingClientRect();
+    if (rect.bottom <= window.innerHeight && rect.bottom >= 0) {
+      const distance = Math.abs(rect.top);
+      if (distance < minDistance) {
+        minDistance = distance;
+        topElement = header;
+      }
+    }
+  });
+
+  return parseInt(topElement.innerText) - 1;
 }
 
 function updateIndex(idx) {
