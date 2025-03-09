@@ -14,7 +14,7 @@
 
 :root {
     --font-base: 100px;
-    --font-scale: 16/15;
+    --font-scale: 32/31;
     --font-size: calc(var(--font-scale) * var(--font-base));
     --line-height-ratio: .78;
     --line-height-px: calc(var(--line-height-ratio) * var(--font-size));
