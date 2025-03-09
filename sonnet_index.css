@@ -28,7 +28,7 @@
 body {
     font-family: "Helvetica";
     font-size: var(--font-size);
-    font-weight: 300;
+    font-weight: 700;
     line-height: var(--line-height-ratio);
     margin: 0;
 
@@ -57,9 +57,18 @@ body {
     color: red;
 }
 
+.title:hover {
+    color: inherit;
+}
+
+
 .quatrain, .couplet {
     margin-bottom: var(--vertical-margin);
     margin-top: var(--vertical-margin);
+}
+
+.couplet {
+    margin-left: var(--vertical-margin);
 }
 
 .line {
@@ -69,6 +78,13 @@ body {
 
     margin: 0;
     padding-top: var(--small-vertical-margin);
+}
+
+.title {
+    text-decoration: none;
+    width: calc(8 * var(--line-height-px));
+
+    margin-bottom: calc(-1.5 * var(--small-font-height-px));
 }
 
 .flex-row {
@@ -106,14 +122,18 @@ body {
     display: none;
 }
 
+.text-align-right {
+    text-align: right;
+}
+
 #sonnet-number-header {
     cursor: pointer;
 }
 
 
 .sonnet {
-    padding-top: calc(2 * var(--vertical-margin));
-    margin-bottom: calc(4 * var(--vertical-margin));
+    padding-top: calc(4 * var(--vertical-margin));
+    margin-bottom: calc(0 * var(--vertical-margin));
 }
 
 @media only screen and (max-width: 940px) {
@@ -122,44 +142,49 @@ body {
     }
 }
 
-@media only screen and (max-width: 705px) {
+@media only screen and (max-width: 720px) {
     :root {
         --font-size: 75px;
     }
 }
 
+@media screen and (max-width: 540px) {
+    :root {
+        --font-size: 70px;
+    }
+}
 
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 510px) {
     :root {
         --font-size: 65px;
     }
 }
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 470px) {
     :root {
         --font-size: 60px;
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 435px) {
     :root {
         --font-size: 55px;
     }
 }
 
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 400px) {
     :root {
         --font-size: 50px;
     }
 }
 
-@media screen and (max-width: 355px) {
+@media screen and (max-width: 365px) {
     :root {
         --font-size: 45px;
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 330px) {
     :root {
         --font-size: 40px;
     }

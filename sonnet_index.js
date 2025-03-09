@@ -187,7 +187,7 @@ function render() {
   static.elements.toggleViewButton.textContent = state.blogView ? "NV" : "BV";
 
   document.body.classList.toggle("dark-mode", state.darkMode);
-  static.elements.toggleDarkModeButton.textContent = state.darkMode ? "☼" : "☽";
+  static.elements.toggleDarkModeButton.textContent = state.darkMode ? "☼" : "☾";
 
   document.body.classList.toggle("controls-hidden", state.controlsHidden);
 
