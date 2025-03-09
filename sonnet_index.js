@@ -176,6 +176,7 @@ function toggleBlogView() {
     updateIndex(getTopHeader());
     if (state.zoomedOut) {
       toggleZoomedOut();
+      return;
     }
   }
 
@@ -209,12 +210,11 @@ function toggleSecondPageHidden() {
 }
 
 function toggleZoomedOut() {
+  state.zoomedOut = !state.zoomedOut;
+
   if (!state.blogView) {
     state.zoomedOut = false;
-    return;
   }
-
-  state.zoomedOut = !state.zoomedOut;
 
   if (state.zoomedOut) {
     const root = document.documentElement;
@@ -309,16 +309,16 @@ function renderNormalView(right) {
 function render() {
   document.body.classList.toggle("blog-view", state.blogView);
   static.elements.toggleViewButton.textContent = state.blogView ? "NV" : "BV";
-  if (state.blogView) {
-    state.secondPageHidden = true;
-  }
 
   document.body.classList.toggle("dark-mode", state.darkMode);
   static.elements.toggleDarkModeButton.textContent = state.darkMode ? "☼" : "☾";
 
   document.body.classList.toggle("controls-hidden", state.controlsHidden);
 
-  document.body.classList.toggle("second-page-hidden", state.secondPageHidden);
+  document.body.classList.toggle(
+    "second-page-hidden",
+    state.secondPageHidden && !state.blogView,
+  );
 
   document.body.classList.toggle("zoomed-out", state.zoomedOut);
 
