@@ -160,10 +160,6 @@ body {
     cursor: pointer;
 }
 
-:root .zoomed-out {
-    --font-base: 30px;
-}
-
 .zoomed-out #poem-body {
 
     display: flex;
@@ -233,11 +229,17 @@ body {
     :root {
         --font-base: 60px;
     }
+    .zoomed-out #poem-body {
+        height: 85vh;
+    }
 }
 
 @media screen and (max-width: 435px) {
     :root {
         --font-base: 55px;
+    }
+    .zoomed-out #poem-body {
+        height: 85vh;
     }
 }
 
@@ -245,16 +247,26 @@ body {
     :root {
         --font-base: 50px;
     }
+    .zoomed-out #poem-body {
+        height: 85vh;
+    }
 }
 
 @media screen and (max-width: 365px) {
     :root {
         --font-base: 45px;
     }
+    .zoomed-out #poem-body {
+        height: 85vh;
+    }
 }
 
 @media screen and (max-width: 330px) {
     :root {
         --font-base: 40px;
+    }
+
+    .zoomed-out #poem-body {
+        height: 80vh;
     }
 }
